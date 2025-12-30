@@ -11,7 +11,9 @@ local Theme = {
 }
 
 function UI:Init(mods)
-    local gui = Instance.new("ScreenGui", game.CoreGui)
+    -- Create GUI in PlayerGui instead of CoreGui
+    local gui = Instance.new("ScreenGui")
+    gui.Parent = LP:WaitForChild("PlayerGui")
     gui.Name = "SolarA_v3"
 
     local main = Instance.new("Frame", gui)
