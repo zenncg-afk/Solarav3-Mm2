@@ -1,19 +1,25 @@
-if not game:IsLoaded() then
-    game.Loaded:Wait()
+-- init.lua for SolarA v3 MM2
+
+-- Function to fetch and run a module from GitHub
+local function LoadModule(url)
+    local success, result = pcall(function()
+        return loadstring(game:HttpGet(url, true))()
+    end)
+    if not success then
+        warn("Failed to load module from URL: "..url)
+    end
+    return result
 end
 
--- Make sure to replace YOURUSERNAME with your GitHub username
-local base = "https://raw.githubusercontent.com/zenncg-afk/Solarav3-Mm2/main/"
-
-local function Load(path)
-    return loadstring(game:HttpGet(base .. path))()
-end
-
+-- Load modules
 local Modules = {
-    Players = Load("modules/players.lua"),
-    Visuals = Load("modules/visuals.lua"),
-    Roles = Load("modules/roles.lua")
+    Players = LoadModule("https://raw.githubusercontent.com/zenncg-afk/Solarav3-MM2/main/modules/players.lua"),
+    Visuals = LoadModule("https://raw.githubusercontent.com/zenncg-afk/Solarav3-MM2/main/modules/visuals.lua"),
+    Roles   = LoadModule("https://raw.githubusercontent.com/zenncg-afk/Solarav3-MM2/main/modules/roles.lua")
 }
 
-local UI = Load("ui.lua")
-UI:Init(Modules)
+-- Load UI
+LoadModule("https://raw.githubusercontent.com/zenncg-afk/Solarav3-MM2/main/ui.lua")
+
+-- Any additional init code can go here
+print("SolarA v3 loaded successfully!")
